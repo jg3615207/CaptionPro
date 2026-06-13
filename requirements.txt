@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+python-multipart
+structlog
+faster-whisper==1.1.0
+whisper-timestamped==1.15.8
+whisperx==3.3.1
+pysubs2
+demucs==4.0.1
+ffmpeg-python==0.2.0
+torch==2.5.1+cu124
+torchvision==0.20.1+cu124
+torchaudio==2.5.1+cu124
+nvidia-cublas-cu12
+nvidia-cudnn-cu12==8.9.7.29
+opencc-python-reimplemented==0.1.7
+--extra-index-url https://download.pytorch.org/whl/cu124
