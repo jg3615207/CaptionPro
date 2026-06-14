@@ -80,14 +80,15 @@ body {
 .logo h1 {
     background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .logo h1 span {
-    color: var(--accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .header-right {
