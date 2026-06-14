@@ -26,7 +26,18 @@ document.addEventListener('DOMContentLoaded', () => {
             tabBtns.forEach(b => b.classList.remove('active'));
             tabContents.forEach(c => c.classList.remove('active'));
             btn.classList.add('active');
-            document.getElementById(btn.getAttribute('data-tab')).classList.add('active');
+            
+            const targetContentId = btn.getAttribute('data-tab');
+            document.getElementById(targetContentId).classList.add('active');
+            
+            // Sync main tabs
+            if (targetContentId === 'core-settings' || targetContentId === 'post-settings') {
+                const mainBtn = document.querySelector('.main-tab-btn[data-tab="view-transcription"]');
+                if (mainBtn && !mainBtn.classList.contains('active')) mainBtn.click();
+            } else if (targetContentId === 'ai-settings') {
+                const mainBtn = document.querySelector('.main-tab-btn[data-tab="view-translation"]');
+                if (mainBtn && !mainBtn.classList.contains('active')) mainBtn.click();
+            }
         });
     });
 
@@ -115,7 +126,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileNameDisplay = document.getElementById('fileName');
     const startBtn = document.getElementById('startBtn');
 
-    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('click', (e) => {
+        // Only trigger file picker if the click wasn't directly on the button to avoid double picker
+        if (e.target !== dropZone.querySelector('.primary-btn')) {
+            fileInput.click();
+        }
+    });
+    
+    const browseBtn = dropZone.querySelector('.primary-btn');
+    if (browseBtn) {
+        browseBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            fileInput.click();
+        });
+    }
+
     dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
     dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
     dropZone.addEventListener('drop', (e) => {
@@ -141,7 +166,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const srtFileNameDisplay = document.getElementById('srtFileName');
     const startTranslationBtn = document.getElementById('startTranslationBtn');
 
-    srtDropZone.addEventListener('click', () => srtFileInput.click());
+    srtDropZone.addEventListener('click', (e) => {
+        // Only trigger file picker if the click wasn't directly on the button to avoid double picker
+        if (e.target !== srtDropZone.querySelector('.primary-btn')) {
+            srtFileInput.click();
+        }
+    });
+
+    const srtBrowseBtn = srtDropZone.querySelector('.primary-btn');
+    if (srtBrowseBtn) {
+        srtBrowseBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            srtFileInput.click();
+        });
+    }
+
     srtDropZone.addEventListener('dragover', (e) => { e.preventDefault(); srtDropZone.classList.add('dragover'); });
     srtDropZone.addEventListener('dragleave', () => srtDropZone.classList.remove('dragover'));
     srtDropZone.addEventListener('drop', (e) => {

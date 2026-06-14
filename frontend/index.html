@@ -1,4 +1,4 @@
-<!DOCTYPE strict>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,9 +17,9 @@
                 <i class="fa-solid fa-microphone-lines"></i>
                 <h1>Whisper <span>Subtitles</span></h1>
             </div>
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <p class="subtitle" style="margin: 0;">AI-Powered Premium Transcription</p>
-                <button id="openWorkspaceBtn" class="btn secondary">
+            <div class="header-right">
+                <p class="subtitle">AI-Powered Premium Transcription</p>
+                <button id="openWorkspaceBtn" class="secondary-btn">
                     <i class="fa-regular fa-folder-open"></i> Workspace
                 </button>
             </div>
@@ -123,7 +123,7 @@
             </aside>
 
             <!-- Main Upload Area -->
-            <section class="upload-section">
+            <section class="upload-section glass-panel">
                 
                 <!-- Main App Tabs -->
                 <div class="main-tabs">
@@ -137,7 +137,7 @@
                         <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
                         <h2>Drag & Drop Media File</h2>
                         <p>or</p>
-                        <button class="primary-btn" onclick="document.getElementById('fileInput').click()" style="margin: 1rem auto;">
+                        <button class="primary-btn" style="margin: 1rem auto;">
                             Browse Files
                         </button>
                         <p class="file-name" id="fileName"></p>
@@ -154,7 +154,7 @@
                         <i class="fa-solid fa-file-lines upload-icon"></i>
                         <h2>Drag & Drop SRT File</h2>
                         <p>or</p>
-                        <button class="primary-btn" onclick="document.getElementById('srtFileInput').click()" style="margin: 1rem auto;">
+                        <button class="primary-btn" style="margin: 1rem auto;">
                             Browse SRT
                         </button>
                         <p class="file-name" id="srtFileName"></p>
