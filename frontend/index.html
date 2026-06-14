@@ -132,35 +132,35 @@
                 </div>
 
                 <div id="view-transcription" class="main-tab-content active">
-                    <div class="upload-card glass-panel" id="dropZone">
+                    <div class="upload-box" id="dropZone">
                         <input type="file" id="fileInput" hidden accept="audio/*,video/*">
                         <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
                         <h2>Drag & Drop Media File</h2>
                         <p>or</p>
-                        <button class="btn primary" onclick="document.getElementById('fileInput').click()">
+                        <button class="primary-btn" onclick="document.getElementById('fileInput').click()" style="margin: 1rem auto;">
                             Browse Files
                         </button>
                         <p class="file-name" id="fileName"></p>
                     </div>
 
-                    <button id="startBtn" class="btn primary full-width" disabled>
+                    <button id="startBtn" class="primary-btn full-width" disabled>
                         <i class="fa-solid fa-wand-magic-sparkles"></i> Start Transcription
                     </button>
                 </div>
 
                 <div id="view-translation" class="main-tab-content">
-                    <div class="upload-card glass-panel" id="srtDropZone">
+                    <div class="upload-box" id="srtDropZone">
                         <input type="file" id="srtFileInput" hidden accept=".srt">
                         <i class="fa-solid fa-file-lines upload-icon"></i>
                         <h2>Drag & Drop SRT File</h2>
                         <p>or</p>
-                        <button class="btn primary" onclick="document.getElementById('srtFileInput').click()">
+                        <button class="primary-btn" onclick="document.getElementById('srtFileInput').click()" style="margin: 1rem auto;">
                             Browse SRT
                         </button>
                         <p class="file-name" id="srtFileName"></p>
                     </div>
 
-                    <button id="startTranslationBtn" class="btn primary full-width" disabled>
+                    <button id="startTranslationBtn" class="primary-btn full-width" disabled>
                         <i class="fa-solid fa-robot"></i> Start AI Translation
                     </button>
                 </div>

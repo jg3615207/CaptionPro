@@ -483,6 +483,12 @@ input[type="range"]::-webkit-slider-thumb {
     border-color: var(--primary);
 }
 
+.full-width {
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
 .primary-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
