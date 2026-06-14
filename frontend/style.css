@@ -345,7 +345,7 @@ input:checked + .slider:before {
     font-weight: 600;
 }
 
-select, input[type="range"] {
+select, input[type="text"], input[type="range"] {
     width: 100%;
     padding: 0.6rem;
     border-radius: 8px;
@@ -357,7 +357,7 @@ select, input[type="range"] {
     transition: all 0.3s ease;
 }
 
-select:focus {
+select:focus, input[type="text"]:focus {
     border-color: var(--primary);
     box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
 }
