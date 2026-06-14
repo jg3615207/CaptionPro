@@ -34,6 +34,8 @@ try:
 except ImportError:
     WhisperXInference = None
 
+from backend.ai_translator import AITranslator
+
 logger = structlog.get_logger()
 
 app = FastAPI(title="Standalone Whisper Web UI")
@@ -95,7 +97,11 @@ async def transcribe(
     compute_type: str = Form("default"),
     highlight_words: str = Form("false"),
     denoise_level: int = Form(0),
-    convert_to_traditional: str = Form("false")
+    convert_to_traditional: str = Form("false"),
+    auto_translate: str = Form("false"),
+    ai_api_url: str = Form("http://localhost:1234/v1"),
+    ai_model_name: str = Form("local-model"),
+    ai_target_lang: str = Form("Traditional Chinese")
 ):
     try:
         is_highlight = highlight_words.lower() == "true"
@@ -146,6 +152,12 @@ async def transcribe(
                 
         srt_content = ""
         if srt_file and os.path.exists(srt_file):
+            if auto_translate.lower() == "true":
+                logger.info(f"Auto-translating SRT using {ai_model_name} at {ai_api_url}")
+                translator = AITranslator(api_base=ai_api_url, model_name=ai_model_name)
+                translated_path = translator.translate_srt(srt_file, ai_target_lang)
+                srt_file = translated_path
+                
             with open(srt_file, 'r', encoding='utf-8') as f:
                 srt_content = f.read()
                 
@@ -157,6 +169,41 @@ async def transcribe(
         
     except Exception as e:
         logger.error(f"Error during transcription: {e}")
+        return JSONResponse(status_code=500, content={"success": False, "error": str(e)})
+
+@app.post("/api/translate-srt")
+async def translate_srt_endpoint(
+    file: UploadFile = File(...),
+    ai_api_url: str = Form("http://localhost:1234/v1"),
+    ai_model_name: str = Form("local-model"),
+    ai_target_lang: str = Form("Traditional Chinese")
+):
+    try:
+        # Save uploaded SRT to workspace
+        safe_name = f"{int(time.time())}_{file.filename}"
+        source_file_path = os.path.join(workspace_dir, safe_name)
+        
+        with open(source_file_path, "wb") as f:
+            shutil.copyfileobj(file.file, f)
+            
+        logger.info(f"SRT saved to {source_file_path} for translation.")
+        
+        translator = AITranslator(api_base=ai_api_url, model_name=ai_model_name)
+        translated_path = translator.translate_srt(source_file_path, ai_target_lang)
+        
+        srt_content = ""
+        if os.path.exists(translated_path):
+            with open(translated_path, 'r', encoding='utf-8') as f:
+                srt_content = f.read()
+                
+        return JSONResponse(content={
+            "success": True,
+            "srt_content": srt_content,
+            "message": "Translation successful"
+        })
+        
+    except Exception as e:
+        logger.error(f"Error during SRT translation: {e}")
         return JSONResponse(status_code=500, content={"success": False, "error": str(e)})
 
 @app.post("/api/open-workspace")

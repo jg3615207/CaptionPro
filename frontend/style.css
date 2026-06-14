@@ -265,6 +265,50 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
+/* Main App Tabs */
+.main-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+}
+
+.main-tab-btn {
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.main-tab-btn:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.main-tab-btn.active {
+    color: white;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    border-color: transparent;
+}
+
+.main-tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.main-tab-content.active {
+    display: block;
+}
+
 .form-group {
     margin-bottom: 1.2rem;
 }

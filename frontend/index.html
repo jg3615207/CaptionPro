@@ -17,7 +17,12 @@
                 <i class="fa-solid fa-microphone-lines"></i>
                 <h1>Whisper <span>Subtitles</span></h1>
             </div>
-            <p class="subtitle">AI-Powered Premium Transcription</p>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <p class="subtitle" style="margin: 0;">AI-Powered Premium Transcription</p>
+                <button id="openWorkspaceBtn" class="btn secondary">
+                    <i class="fa-regular fa-folder-open"></i> Workspace
+                </button>
+            </div>
         </header>
 
         <main class="main-content">
@@ -26,6 +31,7 @@
                 <div class="tabs">
                     <button class="tab-btn active" data-tab="core-settings"><i class="fa-solid fa-sliders"></i> Core</button>
                     <button class="tab-btn" data-tab="post-settings"><i class="fa-solid fa-language"></i> Post-Proc</button>
+                    <button class="tab-btn" data-tab="ai-settings"><i class="fa-solid fa-robot"></i> AI</button>
                 </div>
                 
                 <div id="core-settings" class="tab-content active">
@@ -75,26 +81,87 @@
                         </div>
                     </div>
                 </div>
+                
+                <div id="ai-settings" class="tab-content">
+                    <div class="post-card">
+                        <h3><i class="fa-solid fa-robot"></i> LM Studio AI Translator</h3>
+                        <p class="desc">Auto-translate the generated subtitles using a local LLM.</p>
+                        
+                        <div class="toggle-container" style="margin-bottom: 1rem;">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="autoTranslate">
+                                <span class="slider round"></span>
+                            </label>
+                            <span>Enable Auto-Translate</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="aiApiUrl">LM Studio API URL</label>
+                            <input type="text" id="aiApiUrl" name="aiApiUrl" value="http://localhost:1234/v1">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="aiModelName">Model Name</label>
+                            <input type="text" id="aiModelName" name="aiModelName" value="deepseek-coder">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="aiTargetLang">Target Language</label>
+                            <select id="aiTargetLang" name="aiTargetLang">
+                                <option value="Traditional Chinese">Traditional Chinese</option>
+                                <option value="Simplified Chinese">Simplified Chinese</option>
+                                <option value="English">English</option>
+                                <option value="Japanese">Japanese</option>
+                                <option value="Korean">Korean</option>
+                                <option value="Spanish">Spanish</option>
+                                <option value="French">French</option>
+                                <option value="German">German</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </aside>
 
             <!-- Main Upload Area -->
-            <section class="upload-section glass-panel">
-                <div class="upload-box" id="dropzone">
-                    <input type="file" id="fileInput" accept="audio/*,video/*" hidden>
-                    <div class="upload-icon">
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                    </div>
-                    <h3>Drag & Drop Video or Audio</h3>
-                    <p>or click to browse files</p>
-                    <span class="file-name" id="fileName">No file selected</span>
+            <section class="upload-section">
+                
+                <!-- Main App Tabs -->
+                <div class="main-tabs">
+                    <button class="main-tab-btn active" data-tab="view-transcription"><i class="fa-solid fa-microphone"></i> Transcription</button>
+                    <button class="main-tab-btn" data-tab="view-translation"><i class="fa-solid fa-language"></i> AI Translation</button>
                 </div>
 
-                <div class="actions">
-                    <button id="openWorkspaceBtn" class="secondary-btn" style="margin-right: 10px;">
-                        <i class="fa-regular fa-folder-open"></i> Open Workspace
+                <div id="view-transcription" class="main-tab-content active">
+                    <div class="upload-card glass-panel" id="dropZone">
+                        <input type="file" id="fileInput" hidden accept="audio/*,video/*">
+                        <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                        <h2>Drag & Drop Media File</h2>
+                        <p>or</p>
+                        <button class="btn primary" onclick="document.getElementById('fileInput').click()">
+                            Browse Files
+                        </button>
+                        <p class="file-name" id="fileName"></p>
+                    </div>
+
+                    <button id="startBtn" class="btn primary full-width" disabled>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Start Transcription
                     </button>
-                    <button id="transcribeBtn" class="primary-btn" disabled>
-                        <i class="fa-solid fa-wand-magic-sparkles"></i> Transcribe
+                </div>
+
+                <div id="view-translation" class="main-tab-content">
+                    <div class="upload-card glass-panel" id="srtDropZone">
+                        <input type="file" id="srtFileInput" hidden accept=".srt">
+                        <i class="fa-solid fa-file-lines upload-icon"></i>
+                        <h2>Drag & Drop SRT File</h2>
+                        <p>or</p>
+                        <button class="btn primary" onclick="document.getElementById('srtFileInput').click()">
+                            Browse SRT
+                        </button>
+                        <p class="file-name" id="srtFileName"></p>
+                    </div>
+
+                    <button id="startTranslationBtn" class="btn primary full-width" disabled>
+                        <i class="fa-solid fa-robot"></i> Start AI Translation
                     </button>
                 </div>
 
