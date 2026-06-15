@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Whisper Subtitles</title>
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=4">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -56,9 +56,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="denoiseLevel">Denoise Level</label>
+                        <div class="form-label-row">
+                            <label for="denoiseLevel">Denoise Level</label>
+                            <span id="denoiseValue">0 (None)</span>
+                        </div>
                         <input type="range" id="denoiseLevel" name="denoiseLevel" min="0" max="2" value="0">
-                        <span id="denoiseValue">0 (None)</span>
                     </div>
 
                     <div class="form-group checkbox-group">
@@ -184,6 +186,6 @@
         </main>
     </div>
 
-    <script src="app.js?v=3"></script>
+    <script src="app.js?v=4"></script>
 </body>
 </html>
